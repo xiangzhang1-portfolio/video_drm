@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>请勿外传</title>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+
+    <script class="code">
+        flask_url = 'http://localhost:5000'
+
+        $(document).ready(function() {
+            //select
+            $.get(flask_url + '/ls', function(arr){
+                $.each(arr, function(key, value) {
+                    $('select').append($('<option>', {
+                        value: value,
+                        text: value
+                    }));
+                });
+            })
+
+            //video
+            $('select').on('change', function() {
+                alert("Playing " + this.value);
+                const protData = {
+                    "org.w3.clearkey": {
+                        "clearkeys": {
+                            "QyZGKUpATmNSZlRqV25acg": "LUphTmRSZlVqWG4ycjV1OA"
+                        }
+                    }
+                };
+                var video,
+                    player,
+                    url = "dash/" + this.value + "/stream.mpd";
+
+                video = document.querySelector("video");
+                player = dashjs.MediaPlayer().create();
+                player.initialize(video, url, true);
+                player.setProtectionData(protData);
+            });
+        })
+    </script>
+
+    <style>
+        video {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <select></select>
+    <br/>
+    <video controls="true"></video>
+</body>
+</html>
