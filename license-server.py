@@ -12,18 +12,22 @@ CORS(app)
 def license_():
     args = request.args.to_dict()
     ip = request.remote_addr
-    # on Windows, no client-specific information is sent.
+    machid = args.keys()[0]
     with open('license-server.log', 'w') as f:
-        f.write('ip: %s' %ip)
-    return jsonify({
-        "keys": [
-            {
-                "kid": "QyZGKUpATmNSZlRqV25acg",
-                "k": "LUphTmRSZlVqWG4ycjV1OA"
-            }
-        ]
-    })
-
+        f.write('ip: %s, machid: %s' %(ip, machid))
+    allowed_machid = [
+        'QyZGKUpATmNSZlRqV25acg',
+    ]
+    if machid in allowed_machid:
+        return jsonify({
+            "keys": [
+                {
+                    "kid": "QyZGKUpATmNSZlRqV25acg",
+                    "k": "LUphTmRSZlVqWG4ycjV1OA"
+                }
+            ]
+        })
+    
 
 @app.route('/ls')
 def ls_():
