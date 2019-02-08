@@ -70,6 +70,8 @@ Livestreamer: no-plugin
 
 IDM只能下载无关的init.mp4。
 
+不存在高明的解密师。都是渣渣！
+
 # Deploy之前请确认：
 
 注意index.html（未obfuscate版本），source（视频文件未加密版本）不要传。
@@ -80,8 +82,14 @@ IDM只能下载无关的init.mp4。
 
 `index_obfuscate.html`要单独obfuscate HTML和Javascript，不能一块儿。
 
-# 错误：
+# 错误1
 
+- 有界面，但是没视频。
+- Console有一个错误：No supported version of EME detected on this user agent! - Attempts to play encrypted content will fail! 
+- Flask端没有感受到query（license/?scISnfoXFifmsoamp）
+
+解释：估计是因为simple-http-server不提供HTTPS。Chrome（Firefox也开始）强制要求HTTPS而非HTTP，否则就会报这个错。
+A tentative https server is attached.
 
 
 
