@@ -12,13 +12,13 @@ CORS(app)
 def license_():
     args = request.args.to_dict()
     ip = request.remote_addr
-    machid = args.keys()[0]
-    with open('license-server.log', 'w') as f:
-        f.write('ip: %s, machid: %s' %(ip, machid))
-    allowed_machid = [
+    query = args.keys()[0]    # Seems to correspond to Browser type. Does not identify client or video. Helps identify client compatibility.
+    with open('license-server.log', 'a') as f:
+        f.write('ip: %s, query: %s\n' %(ip, query))
+    allowed_query = [
         'QyZGKUpATmNSZlRqV25acg',
     ]
-    if machid in allowed_machid:
+    if query in allowed_query:
         return jsonify({
             "keys": [
                 {

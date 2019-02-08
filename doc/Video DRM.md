@@ -80,6 +80,9 @@ IDM只能下载无关的init.mp4。
 
 `index_obfuscate.html`要单独obfuscate HTML和Javascript，不能一块儿。
 
+# 错误：
+
+
 
 
 [1]:	http://www.tlxsoft.com/jiami.htm
